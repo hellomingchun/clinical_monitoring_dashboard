@@ -72,6 +72,10 @@ test_that("mod_patient_profile UI and server display subject demographics and ti
     sub <- selected_adsl()
     expect_equal(nrow(sub), 1)
     expect_equal(sub$USUBJID, test_subj)
+
+    # Verify patient plots render without missing aesthetics error
+    expect_false(is.null(output$plot_patient_ae_timeline))
+    expect_false(is.null(output$plot_patient_trends))
   })
 })
 

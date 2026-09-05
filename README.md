@@ -3,7 +3,7 @@
 [![R](https://img.shields.io/badge/R-%3E%3D%204.0.0-blue.svg)](https://www.r-project.org/)
 [![Golem](https://img.shields.io/badge/built%20with-golem-orange.svg)](https://github.com/ThinkR-open/golem)
 [![Shiny](https://img.shields.io/badge/Shiny-1.8+-blue.svg)](https://shiny.posit.co/)
-[![Tests](https://img.shields.io/badge/Tests-114%20passing-brightgreen.svg)](tests/testthat)
+[![Tests](https://img.shields.io/badge/Tests-116%20passing-brightgreen.svg)](tests/testthat)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An interactive, production-ready `{golem}` Shiny web application designed for biostatisticians, clinical data scientists, medical monitors, and clinical trial operations teams. It facilitates real-time tracking of subject journeys, milestone disposition, adverse events (AEs), laboratory hepatotoxicity signals (Hy's Law / DILI), and risk-based site monitoring.
@@ -110,7 +110,7 @@ testthat::test_dir("tests/testthat")
 
 ```text
 ══ Results ═════════════════════════════════════════════════════════════════════
-[ FAIL 0 | WARN 32 | SKIP 0 | PASS 114 ]
+[ FAIL 0 | WARN 32 | SKIP 0 | PASS 116 ]
 ```
 
 ---

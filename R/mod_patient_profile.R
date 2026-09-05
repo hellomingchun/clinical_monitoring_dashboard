@@ -66,10 +66,13 @@ mod_patient_profile_server <- function(id, data) {
         return(plotly_empty() %>% layout(title = "No Adverse Events recorded for this subject."))
       }
       
-      p <- ggplot(sub_aes, aes(y = AEDECOD, x = ASTDT, xend = AENDT, color = AESEV)) +
-        geom_segment(linewidth = 3) +
-        geom_point(aes(x = ASTDT), size = 3) +
-        geom_point(aes(x = AENDT), size = 3) +
+      p <- ggplot(sub_aes) +
+        geom_segment(
+          aes(y = AEDECOD, yend = AEDECOD, x = ASTDT, xend = AENDT, color = AESEV),
+          linewidth = 3
+        ) +
+        geom_point(aes(x = ASTDT, y = AEDECOD, color = AESEV), size = 3) +
+        geom_point(aes(x = AENDT, y = AEDECOD, color = AESEV), size = 3) +
         labs(x = "Date", y = "", color = "Severity") +
         theme_minimal()
       ggplotly(p)
