@@ -199,6 +199,34 @@ app_ui <- function(request) {
             DT::DTOutput("patient_table")
           )
         )
+      ),
+
+      # Tab 4: Adverse Event Safety & Toxicity Grades
+      nav_panel(
+        title = "AE Safety & Toxicity",
+        icon = bs_icon("shield-exclamation"),
+        mod_ae_safety_ui("ae_safety_1")
+      ),
+
+      # Tab 5: Laboratory Hepatotoxicity & Outliers
+      nav_panel(
+        title = "Hy's Law & Labs",
+        icon = bs_icon("activity"),
+        mod_labs_ui("labs_1")
+      ),
+
+      # Tab 6: Individual Subject Clinical Profile
+      nav_panel(
+        title = "Subject Profile",
+        icon = bs_icon("person-lines-fill"),
+        mod_patient_profile_ui("patient_profile_1")
+      ),
+
+      # Tab 7: Risk-Based Site Monitoring & KRIs
+      nav_panel(
+        title = "Site Risk & KRIs",
+        icon = bs_icon("hospital"),
+        mod_site_performance_ui("site_performance_1")
       )
     )
   )
