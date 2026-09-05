@@ -1,0 +1,9 @@
+^\.Rbuildignore$
+^\.Rproj\.user$
+^.*\.Rproj$
+^\.git$
+^\.github$
+^dev$
+^app\.R$
+^dependencies\.R$
+^LICENSE$

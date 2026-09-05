@@ -1,0 +1,28 @@
+Package: clinicalmonitoringdashboard
+Title: Clinical Trial Safety & Operations Monitoring Dashboard
+Version: 0.0.0.9000
+Authors@R: 
+    person("Ming-Chun", "Chen", , "hellomingchun@gmail.com", role = c("aut", "cre"))
+Description: A Golem-based Shiny application for interactive clinical trial safety, adverse event reporting, laboratory signals (Hy's Law / DILI), subject profiles, and risk-based site operations monitoring.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Imports: 
+    bsicons,
+    bslib,
+    config (>= 0.3.2),
+    dplyr,
+    DT,
+    ggplot2,
+    golem (>= 0.4.1),
+    htmltools,
+    lubridate,
+    pkgload,
+    plotly,
+    scales,
+    shiny (>= 1.8.0),
+    tidyr
+Suggests: 
+    testthat (>= 3.0.0)
+Config/roxygen2/version: 8.0.0

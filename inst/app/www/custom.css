@@ -1,0 +1,15 @@
+/* Custom CSS styles for Clinical Monitoring Dashboard */
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.35em 0.65em;
+}
