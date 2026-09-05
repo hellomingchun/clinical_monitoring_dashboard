@@ -23,13 +23,11 @@ test_that("app_ui produces a valid Shiny UI tag list with required components", 
   expect_match(ui_str, "Swimmer Plot")
   expect_match(ui_str, "Participant Listing")
   expect_match(ui_str, "AE Safety &amp; Toxicity")
-  expect_match(ui_str, "Hy's Law &amp; Labs")
   expect_match(ui_str, "Subject Profile")
   expect_match(ui_str, "Site Risk &amp; KRIs")
 
   # Module IDs in UI
   expect_match(ui_str, "ae_safety_1")
-  expect_match(ui_str, "labs_1")
   expect_match(ui_str, "patient_profile_1")
   expect_match(ui_str, "site_performance_1")
 

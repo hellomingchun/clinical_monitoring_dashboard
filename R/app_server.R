@@ -437,7 +437,6 @@ app_server <- function(input, output, session) {
   # ----------------------------------------------------------------------------
   cdisc_data <- generate_clinical_data()
   mod_ae_safety_server("ae_safety_1", cdisc_data)
-  mod_labs_server("labs_1", cdisc_data)
   mod_patient_profile_server("patient_profile_1", cdisc_data)
   mod_site_performance_server("site_performance_1", cdisc_data)
 }

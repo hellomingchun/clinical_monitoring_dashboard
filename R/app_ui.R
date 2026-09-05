@@ -208,12 +208,6 @@ app_ui <- function(request) {
         mod_ae_safety_ui("ae_safety_1")
       ),
 
-      # Tab 5: Laboratory Hepatotoxicity & Outliers
-      nav_panel(
-        title = "Hy's Law & Labs",
-        icon = bs_icon("activity"),
-        mod_labs_ui("labs_1")
-      ),
 
       # Tab 6: Individual Subject Clinical Profile
       nav_panel(

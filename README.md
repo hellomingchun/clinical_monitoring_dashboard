@@ -3,10 +3,10 @@
 [![R](https://img.shields.io/badge/R-%3E%3D%204.0.0-blue.svg)](https://www.r-project.org/)
 [![Golem](https://img.shields.io/badge/built%20with-golem-orange.svg)](https://github.com/ThinkR-open/golem)
 [![Shiny](https://img.shields.io/badge/Shiny-1.8+-blue.svg)](https://shiny.posit.co/)
-[![Tests](https://img.shields.io/badge/Tests-116%20passing-brightgreen.svg)](tests/testthat)
+[![Tests](https://img.shields.io/badge/Tests-114%20passing-brightgreen.svg)](tests/testthat)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-An interactive, production-ready `{golem}` Shiny web application designed for biostatisticians, clinical data scientists, medical monitors, and clinical trial operations teams. It facilitates real-time tracking of subject journeys, milestone disposition, adverse events (AEs), laboratory hepatotoxicity signals (Hy's Law / DILI), and risk-based site monitoring.
+An interactive, production-ready `{golem}` Shiny web application designed for biostatisticians, clinical data scientists, medical monitors, and clinical trial operations teams. It facilitates real-time tracking of subject journeys, milestone disposition, adverse events (AEs), longitudinal patient profiles, and risk-based site monitoring.
 
 ---
 
@@ -21,7 +21,7 @@ An interactive, production-ready `{golem}` Shiny web application designed for bi
 ### 2. Clinical Safety & CDISC Alignment
 - **CDISC ADaM Datasets**: Synthetic data engine generating standards-aligned `ADSL` (Subject Level), `ADAE` (Adverse Events), `ADLB` (Laboratory Analysis), and `ADPD` (Protocol Deviations).
 - **Adverse Event Profiling**: Categorized by MedDRA System Organ Class (SOC) and CTCAE Toxicity Grade.
-- **Hy's Law Quadrant Analysis**: Multi-parameter scatter plots assessing drug-induced liver injury (DILI) signals ($\text{Peak ALT} \ge 3\times\text{ULN}$ and $\text{Peak Bilirubin} \ge 2\times\text{ULN}$).
+- **Incidence Summaries**: Preferred Terms (PT) incidence by treatment arm and filterable AE listings with CSV export.
 
 ### 3. Subject Clinical Profile & Longitudinal Trends
 - **Single-Subject Drilldown**: Interactive selector with patient demographic card, individual AE timeline from first dose, and longitudinal multi-analyte lab trend charts.
@@ -110,7 +110,7 @@ testthat::test_dir("tests/testthat")
 
 ```text
 ══ Results ═════════════════════════════════════════════════════════════════════
-[ FAIL 0 | WARN 32 | SKIP 0 | PASS 116 ]
+[ FAIL 0 | WARN 32 | SKIP 0 | PASS 114 ]
 ```
 
 ---
