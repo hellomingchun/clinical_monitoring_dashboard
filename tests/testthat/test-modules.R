@@ -1,3 +1,32 @@
+test_that("mod_disposition UI and server initialize and compute metrics correctly", {
+  # Test UI
+  ui <- mod_disposition_ui("disp_test")
+  expect_s3_class(ui, "shiny.tag.list")
+  ui_str <- as.character(ui)
+  expect_match(ui_str, "ICF Obtained")
+  expect_match(ui_str, "Subject Disposition Flow")
+
+  # Test Server
+  raw <- generate_clinical_trial_data(n_subjects = 40, seed = 123)
+  df_subj <- raw$subjects
+  shiny::testServer(mod_disposition_server, args = list(filtered_subjects = reactive(df_subj)), {
+    session$flushReact()
+    expect_equal(as.character(output$kpi_icf), as.character(nrow(df_subj)))
+    expect_match(output$kpi_screen, "%")
+    expect_match(output$kpi_rand, "^[0-9]+$")
+    expect_match(output$kpi_treated, "[0-9]+ / [0-9]+")
+    expect_equal(as.character(output$kpi_rescreen), as.character(sum(df_subj$rescreen_flag == "Yes")))
+    expect_equal(as.character(output$kpi_on_treatment), as.character(sum(df_subj$current_status == "On Treatment")))
+  })
+
+  # Test Server with empty data
+  shiny::testServer(mod_disposition_server, args = list(filtered_subjects = reactive(df_subj[0, ])), {
+    session$flushReact()
+    expect_equal(as.character(output$kpi_icf), "0")
+    expect_equal(as.character(output$kpi_screen), "0%")
+  })
+})
+
 test_that("mod_overview UI and server initialize and compute metrics correctly", {
   # Test UI
   ui <- mod_overview_ui("overview_test")
@@ -93,3 +122,42 @@ test_that("mod_site_performance UI and server calculate site metrics", {
     expect_true(all(c("SITEID", "PLANNED_ENROLL", "ACTUAL_ENROLLED", "PROTOCOL_DEVIATIONS", "OPEN_QUERIES") %in% names(metrics)))
   })
 })
+
+test_that("mod_swimmer UI and server render swimmer plot", {
+  ui <- mod_swimmer_ui("swimmer_test")
+  expect_s3_class(ui, "shiny.tag.list")
+  expect_match(as.character(ui), "Swimmer Plot")
+
+  raw <- generate_clinical_trial_data(n_subjects = 30, seed = 303)
+  shiny::testServer(
+    mod_swimmer_server,
+    args = list(filtered_subjects = reactive(raw$subjects), df_all_events = raw$events),
+    {
+      session$flushReact()
+      expect_false(is.null(output$swimmer_plot))
+    }
+  )
+})
+
+test_that("mod_patient_listing UI and server render table and download CSV", {
+  ui <- mod_patient_listing_ui("listing_test")
+  expect_s3_class(ui, "shiny.tag.list")
+  expect_match(as.character(ui), "Export CSV")
+
+  raw <- generate_clinical_trial_data(n_subjects = 25, seed = 404)
+  shiny::testServer(
+    mod_patient_listing_server,
+    args = list(filtered_subjects = reactive(raw$subjects)),
+    {
+      session$flushReact()
+      expect_false(is.null(output$patient_table))
+
+      tmp_file <- output$download_csv
+      expect_true(file.exists(tmp_file))
+      downloaded_data <- read.csv(tmp_file)
+      expect_equal(nrow(downloaded_data), nrow(raw$subjects))
+      expect_true("usubjid" %in% names(downloaded_data))
+    }
+  )
+})
+

@@ -83,20 +83,6 @@ app_ui <- function(request) {
           end = as.Date("2025-12-31"),
           min = as.Date("2025-01-01"),
           max = as.Date("2026-12-31")
-        ),
-        hr(),
-        tags$h6("Swimmer Display Options"),
-        sliderInput(
-          "swimmer_top_n", "Subjects to display in Swimmer:",
-          min = 10, max = 50, value = 25, step = 5
-        ),
-        selectInput(
-          "swimmer_sort", "Sort Swimmer By:",
-          choices = c(
-            "Longest Duration" = "duration",
-            "Subject ID" = "id",
-            "Treatment Arm" = "arm"
-          )
         )
       ),
 
@@ -104,101 +90,21 @@ app_ui <- function(request) {
       nav_panel(
         title = "Overview & Disposition",
         icon = bs_icon("speedometer2"),
-        layout_columns(
-          fill = FALSE,
-          value_box(
-            title = "ICF Obtained",
-            value = textOutput("kpi_icf"),
-            showcase = bsicons::bs_icon("file-earmark-medical-fill"),
-            theme = "primary"
-          ),
-          value_box(
-            title = "Screening Pass Rate",
-            value = textOutput("kpi_screen"),
-            showcase = bsicons::bs_icon("check2-circle"),
-            theme = "success"
-          ),
-          value_box(
-            title = "Rescreened",
-            value = textOutput("kpi_rescreen"),
-            showcase = bsicons::bs_icon("arrow-repeat"),
-            theme = "info"
-          ),
-          value_box(
-            title = "Randomized",
-            value = textOutput("kpi_rand"),
-            showcase = bsicons::bs_icon("shuffle"),
-            theme = "secondary"
-          ),
-          value_box(
-            title = "Treated vs Not Treated",
-            value = textOutput("kpi_treated"),
-            showcase = bsicons::bs_icon("capsule"),
-            theme = "warning"
-          ),
-          value_box(
-            title = "Currently On Treatment",
-            value = textOutput("kpi_on_treatment"),
-            showcase = bsicons::bs_icon("heart-pulse-fill"),
-            theme = "danger"
-          )
-        ),
-        br(),
-        layout_columns(
-          col_widths = c(7, 5),
-          card(
-            card_header(class = "bg-light", strong("Subject Disposition Flow (CONSORT Funnel)")),
-            card_body(plotlyOutput("disposition_funnel_plot", height = "380px"))
-          ),
-          card(
-            card_header(class = "bg-light", strong("Enrollment & Milestone Distribution by Site")),
-            card_body(plotlyOutput("site_milestone_plot", height = "380px"))
-          )
-        ),
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(class = "bg-light", strong("Screening Failure Reasons")),
-            card_body(plotlyOutput("screen_failure_plot", height = "280px"))
-          ),
-          card(
-            card_header(class = "bg-light", strong("Randomized but Not Treated Reasons")),
-            card_body(plotlyOutput("not_treated_plot", height = "280px"))
-          )
-        )
+        mod_disposition_ui("disposition_1")
       ),
 
       # Tab 2: Swimmer Plot Tab
       nav_panel(
         title = "Swimmer Plot (Patient Journeys)",
         icon = bs_icon("water"),
-        card(
-          card_header(
-            class = "bg-light d-flex justify-content-between align-items-center",
-            strong("Subject Treatment Timeline & Milestone Events (Swimmer Plot)"),
-            span(class = "badge bg-secondary", "Interactive Plotly")
-          ),
-          card_body(
-            p(class = "text-muted", "Each horizontal bar represents a participant's time on study from ICF consent. Milestone markers denote First Dose, Confirmed Tumor Responses (PR/CR), Severe Adverse Events (Grade 3+), and ongoing treatment status."),
-            plotlyOutput("swimmer_plot", height = "650px")
-          )
-        )
+        mod_swimmer_ui("swimmer_1")
       ),
 
       # Tab 3: Detailed Patient Listing Tab
       nav_panel(
         title = "Participant Listing & Details",
         icon = bs_icon("table"),
-        card(
-          card_header(
-            class = "bg-light d-flex justify-content-between align-items-center",
-            strong("Individual Participant Records (ADSL / Clinical Traceability)"),
-            downloadButton("download_csv", "Export CSV", class = "btn-sm btn-outline-primary")
-          ),
-          card_body(
-            DT::DTOutput("patient_table")
-          )
-        )
+        mod_patient_listing_ui("patient_listing_1")
       ),
 
       # Tab 4: Adverse Event Safety & Toxicity Grades
@@ -208,6 +114,12 @@ app_ui <- function(request) {
         mod_ae_safety_ui("ae_safety_1")
       ),
 
+      # Tab 5: Demographics & Study Overview
+      nav_panel(
+        title = "Demographics & Overview",
+        icon = bs_icon("pie-chart"),
+        mod_overview_ui("overview_1")
+      ),
 
       # Tab 6: Individual Subject Clinical Profile
       nav_panel(

@@ -44,18 +44,20 @@ clinical_monitoring_dashboard/
 ├── app.R                       # Standalone launcher for Shiny Server / Posit Connect
 ├── R/
 │   ├── app_config.R            # Configuration helper functions
-│   ├── app_ui.R                # Core dashboard layout and navigation bar
-│   ├── app_server.R            # Reactive server logic and interactive outputs
+│   ├── app_ui.R                # Core dashboard layout and navigation bar (thin shell)
+│   ├── app_server.R            # Reactive server orchestrator
 │   ├── fct_synthetic_data.R    # Synthetic CDISC & trial milestone data generator
-│   ├── mod_overview.R          # Overview & demographic module
+│   ├── mod_disposition.R       # Trial disposition & CONSORT flow module
+│   ├── mod_swimmer.R           # Patient journey swimmer timeline module
+│   ├── mod_patient_listing.R   # Participant traceability & CSV export module
 │   ├── mod_ae_safety.R         # Adverse event safety reporting module
-│   ├── mod_labs.R              # Laboratory signals & Hy's law module
+│   ├── mod_overview.R          # Overview & demographic module
 │   ├── mod_patient_profile.R   # Single-patient clinical journey profile module
 │   ├── mod_site_performance.R  # Site performance & risk matrix module
 │   └── run_app.R               # Main entry point to launch dashboard
 ├── tests/
 │   ├── testthat.R              # Automated test runner
-│   └── testthat/               # 114 unit and integration test assertions
+│   └── testthat/               # 123 unit and integration test assertions
 └── dev/
     └── run_dev.R               # Development reload and launch script
 ```

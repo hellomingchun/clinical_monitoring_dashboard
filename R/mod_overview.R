@@ -6,7 +6,7 @@
 #'
 #' @noRd 
 #'
-#' @importFrom shiny NS tagList textOutput
+#' @importFrom shiny NS tagList textOutput moduleServer
 #' @importFrom bslib layout_column_wrap layout_columns value_box card card_header
 #' @importFrom bsicons bs_icon
 #' @importFrom plotly plotlyOutput renderPlotly ggplotly
